@@ -2,13 +2,12 @@
 const form = document.querySelector('#form')
 const input = document.querySelector('#taskInput')
 const tasksList = document.querySelector('#tasksList')
+const emptyList = document.querySelector('#emptyList')
 
 
-
-form.addEventListener('submit', (event) => {
+const addTask = (event) => {
     //Отменяет отправку формы
     event.preventDefault()
-    console.log('submit');
 
     const taskText = input.value
 
@@ -32,4 +31,11 @@ form.addEventListener('submit', (event) => {
     //Очищает поле ввода и оставляет фокус
     input.value = ""
     input.focus()
-})
+
+    // Если в списке задач более 1 элемента то мы его скрываем
+    if (tasksList.children.length > 1) {
+        emptyList.classList.add('none')
+    }
+}
+
+form.addEventListener('submit', addTask) 
